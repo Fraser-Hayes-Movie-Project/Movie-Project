@@ -168,20 +168,21 @@ button.addEventListener('click', function (e) {
 });
 
 
-    // function editMovie(movie) {
-    //
-    //     let options = {
-    //         method: "PUT",
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(movie) //converts the JS Object into a JSON string
-    //         // before sending it up to the server.
-    //     }
-    //     return fetch(`${movieAPI}/${oldMovie.id}`, options)
-    //         .then((response) => response.json())
-    // }
-    //
-    // editMovie(editedMovie).then((data) => console.log(data));
+// function editMovie(movie) {
+//
+//     let options = {
+//         method: "PUT",
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(movie) //converts the JS Object into a JSON string
+//         // before sending it up to the server.
+//     }
+//     return fetch(`${movieAPI}/${oldMovie.id}`, options)
+//         .then((response) => response.json())
+// }
+//
+// editMovie(editedMovie).then((data) => console.log(data));
+
 
 
