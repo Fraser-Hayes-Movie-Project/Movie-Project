@@ -95,26 +95,22 @@ button2.addEventListener('click', function (e) {
     /* Passes newMovie object in createNewMovie function */
 
     createNewMovie(newMovie).then((newMovie) =>
-        console.log(newMovie));
+    {
+        console.log(newMovie)
+        location.reload(true);
+    });
 
 
     /* Logs new movie */
     console.log("User just added movie! The movie is: " + newMovie.title)
+
+
 })
 
 
 
 
 /* --------------- EDIT MOVIE SECTION ---------------  */
-
-function getMovies() {
-    return fetch(movieAPI)
-        .then((response) =>
-            response.json());
-}
-
-getMovies().then((movies) => console.log(movies))
-
 
 var movieNumber = document.getElementById('movie-number');
 var movieTitleEdit = document.getElementById('movie-title-new');
@@ -162,27 +158,65 @@ button.addEventListener('click', function (e) {
 
     }
 
-    editMovie(editedMovie).then((data) => console.log(data));
+    editMovie(editedMovie).then((data) => {
+        console.log(data)
+        location.reload(true);
+    });
+
 
 
 });
 
 
-// function editMovie(movie) {
-//
-//     let options = {
-//         method: "PUT",
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(movie) //converts the JS Object into a JSON string
-//         // before sending it up to the server.
-//     }
-//     return fetch(`${movieAPI}/${oldMovie.id}`, options)
-//         .then((response) => response.json())
-// }
-//
-// editMovie(editedMovie).then((data) => console.log(data));
+/* --------------- LOAD MOVIE SECTION ---------------  */
+
+function getMovies() {
+    return fetch(movieAPI)
+        .then((response) =>
+            response.json());
+
+}
+
+getMovies().then((movies) => {
+
+    $('#loader').css('display', 'none');
+
+    console.log(movies)
+    movies.forEach( movie => {
+
+        $('#movies-div').append(
+            `<div class="card col-md-4">
+            <h3 class="card-title">${movie.title}</h3>
+            <h6 class="card-text">${movie.genre}</h6>
+            <img class="card-img-top" src="${movie.poster}">
+             <div class="card-body">
+            <p class="card-text">${movie.plot}</p>
+            <p class="card-text">Rating: ${movie.rating}</p>
+            
+            <buttton type="button"class="btn btn-primary">Edit</buttton>
+            <button type="button"class="btn btn-primary float-right">Delete</button>
+            
+            
+            </div>
+            </div>`
+        )
+    });
+
+
+})
 
 
 
+
+// <p>rating: ${movie.rating}</p>
+
+// let table = document.getElementById('movies-div');
+// movies.forEach(movie => {
+//     let tr = document.createElement('tr');
+//     Object.entries(movie).forEach(value => {
+//         let td = document.createElement('td');
+//         td.innerHTML= value;
+//         tr.appendChild(td);
+//     });
+//     table.appendChild(tr);
+// });
