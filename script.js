@@ -24,34 +24,7 @@ form is submitted.
 
 
 
-
-
-/* This section grabs the user's inputs for searching a movie, then logs them. */
-
-var movieTitle = document.getElementById('movie-title');
-var movieRating = document.getElementById('movie-rating');
-var button = document.getElementById("submit");
-
-
-button.addEventListener('click', function (e) {
-    e.preventDefault()
-    var movieTitleInput = movieTitle.value
-    var movieRatingInput = movieRating.value
-    console.log(movieTitleInput + " " + movieRatingInput)
-})
-
-
-
-
-/* Gets all the movies */
-
-function getMovies() {
-    return fetch(movieAPI)
-        .then((response) =>
-            response.json());
-}
-
-getMovies().then((movies) => console.log(movies))
+/* --------------- ADD MOVIE SECTION ---------------  */
 
 
 /* Used this function to clean up movies object */
@@ -132,4 +105,83 @@ button2.addEventListener('click', function (e) {
 
 
 
-// createMovie(lilly).then((newMovie) => console.log(newMovie));
+/* --------------- EDIT MOVIE SECTION ---------------  */
+
+function getMovies() {
+    return fetch(movieAPI)
+        .then((response) =>
+            response.json());
+}
+
+getMovies().then((movies) => console.log(movies))
+
+
+var movieNumber = document.getElementById('movie-number');
+var movieTitleEdit = document.getElementById('movie-title-new');
+var movieRatingEdit = document.getElementById('movie-rating-new');
+
+/* NOTE FOR ME:
+
+This changes the movie data, but we need to do two things.
+
+1. The data needs to update without refreshing the page.
+
+2. It needs to return an AJAX request somehow.
+
+* */
+
+var button = document.getElementById("submit");
+
+button.addEventListener('click', function (e) {
+
+    e.preventDefault()
+
+    var movieNumberInput = movieNumber.value
+    var movieTitleEditInput = movieTitleEdit.value
+    var movieRatingEditInput = movieRatingEdit.value
+
+
+    let editedMovie = {
+        title: movieTitleEditInput,
+        rating: movieRatingEditInput,
+        id: movieNumberInput
+    };
+
+    function editMovie(data) {
+
+        let options = {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data) //converts the JS Object into a JSON string
+            // before sending it up to the server.
+        }
+        return fetch(`${movieAPI}/${data.id}`, options)
+            .then((response) => response.json())
+
+    }
+
+    editMovie(editedMovie).then((data) => console.log(data));
+
+
+});
+
+
+    // function editMovie(movie) {
+    //
+    //     let options = {
+    //         method: "PUT",
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(movie) //converts the JS Object into a JSON string
+    //         // before sending it up to the server.
+    //     }
+    //     return fetch(`${movieAPI}/${oldMovie.id}`, options)
+    //         .then((response) => response.json())
+    // }
+    //
+    // editMovie(editedMovie).then((data) => console.log(data));
+
+
