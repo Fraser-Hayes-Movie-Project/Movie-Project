@@ -10,9 +10,20 @@ console.log(movieAPI);
 
 Allow users to add new movies -- ALL SPECIFICATIONS DONE
 
+- Allow users to edit existing movies:
 
+- Give users the option to edit an existing movie
+
+- A form should be pre-populated with the selected movie's details
+
+Like creating a movie, this should not involve any page reloads,
+instead your javascript code should make an ajax request when the
+form is submitted.
 
 */
+
+
+
 
 
 /* This section grabs the user's inputs for searching a movie, then logs them. */
@@ -60,7 +71,7 @@ function deleteMovie(id) {
 // deleteMovie(6)
 
 
-/* This function grabs the user's inputs for adding a movie, then posts them. */
+/* Variables declared outside of function so they can be passed in. */
 
 var movieTitleCustom = document.getElementById('movie-title-custom');
 var movieRatingCustom = document.getElementById('movie-rating-custom');
@@ -68,6 +79,8 @@ var button2 = document.getElementById("add-movie");
 
 
 /* NOTES FOR ME:
+
+This function grabs the user's inputs for adding a movie, then posts them.
 
 Everything is activated once the button is clicked, thus all the
 code is inside the event listener.
@@ -97,7 +110,8 @@ button2.addEventListener('click', function (e) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(movie) //converts the JS Object into              a JSON string before sending it up to the server.
+            body: JSON.stringify(movie) //converts the JS Object into a JSON string before sending
+            // it up to the server.
         }
         return fetch(`${movieAPI}`, options)
             .then((response) =>
