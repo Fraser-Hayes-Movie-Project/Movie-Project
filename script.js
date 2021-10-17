@@ -107,6 +107,44 @@ button2.addEventListener('click', function (e) {
 
 })
 
+/* --------------- LOAD MOVIE SECTION ---------------  */
+
+function getMovies() {
+    return fetch(movieAPI)
+        .then((response) =>
+            response.json());
+
+}
+
+getMovies().then((movies) => {
+
+    $('#loader').css('display', 'none');
+
+    console.log(movies)
+    movies.forEach( movie => {
+
+        $('#movies-div').append(
+            `<div class="card col-md-4">
+            <h3 class="card-title">${movie.title}</h3>
+            <h6 class="card-text">${movie.genre}</h6>
+            <img class="card-img-top" src="${movie.poster}">
+             <div class="card-body">
+            <p class="card-text">${movie.plot}</p>
+            <p class="card-text">Rating: ${movie.rating}</p>
+            
+        
+            <button type="button"class="btn btn-primary">Edit</button>
+            <button type="button"class="btn btn-primary float-right">Delete</button>
+            
+            
+            </div>
+            </div>`
+        )
+    });
+
+
+})
+
 
 
 
@@ -163,60 +201,30 @@ button.addEventListener('click', function (e) {
         location.reload(true);
     });
 
-
-
 });
 
+// Get the modal
+var modal = document.getElementById("myModal");
 
-/* --------------- LOAD MOVIE SECTION ---------------  */
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
 
-function getMovies() {
-    return fetch(movieAPI)
-        .then((response) =>
-            response.json());
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
 
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
 }
 
-getMovies().then((movies) => {
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
 
-    $('#loader').css('display', 'none');
-
-    console.log(movies)
-    movies.forEach( movie => {
-
-        $('#movies-div').append(
-            `<div class="card col-md-4">
-            <h3 class="card-title">${movie.title}</h3>
-            <h6 class="card-text">${movie.genre}</h6>
-            <img class="card-img-top" src="${movie.poster}">
-             <div class="card-body">
-            <p class="card-text">${movie.plot}</p>
-            <p class="card-text">Rating: ${movie.rating}</p>
-            
-            <buttton type="button"class="btn btn-primary">Edit</buttton>
-            <button type="button"class="btn btn-primary float-right">Delete</button>
-            
-            
-            </div>
-            </div>`
-        )
-    });
-
-
-})
-
-
-
-
-// <p>rating: ${movie.rating}</p>
-
-// let table = document.getElementById('movies-div');
-// movies.forEach(movie => {
-//     let tr = document.createElement('tr');
-//     Object.entries(movie).forEach(value => {
-//         let td = document.createElement('td');
-//         td.innerHTML= value;
-//         tr.appendChild(td);
-//     });
-//     table.appendChild(tr);
-// });
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}

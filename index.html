@@ -28,27 +28,43 @@
 
 </form>
 
-<form id="edit-movie-form">
 
-    <h3>Edit a movie!</h3>
+<!-- MODAL TEST -->
 
-    <h4>Movie you would like to edit:</h4>
-    <label for="movie-number">Movie Number:</label>
-    <br>
-    <input type="text" id="movie-number">
-    <br>
+<h2>Modal Example</h2>
 
-    <label for="movie-title-new">NEW Movie Title:</label>
-    <br>
-    <input type="text" id="movie-title-new">
-    <br>
-    <label for="movie-rating-new">NEW Movie Rating:</label>
-    <br>
-    <input type="text" id="movie-rating-new">
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
 
-    <button type="button" id="submit" >Submit</button>
+<!-- The Modal -->
+<div id="myModal" class="modal">
 
-</form>
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Edit a movie!</h3>
+
+            <h4>Movie you would like to edit:</h4>
+
+            <label for="movie-title-new">NEW Movie Title:</label>
+            <br>
+            <input type="text" id="movie-title-new">
+            <br>
+            <label for="movie-rating-new">NEW Movie Rating:</label>
+            <br>
+            <input type="text" id="movie-rating-new">
+            <br>
+            <button type="button" id="submit" >Submit</button>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
 
 <div class="row" id="movies-div"></div>
 
