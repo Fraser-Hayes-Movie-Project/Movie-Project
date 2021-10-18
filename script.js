@@ -249,9 +249,10 @@ function deleteMovie(id) {
     fetch(`${movieAPI}/${id}`, options)
         .then((response) =>
             console.log("Deleted movie with id:" + id, response))
+        .then((response) => location.reload(true));
 }
 
-// deleteMovie(6)
+
 
 
 function deleteButton() {
@@ -260,7 +261,6 @@ function deleteButton() {
         btnDelete[i].addEventListener('click', function (e) {
             e.preventDefault();
             deleteMovie(this.dataset.movieId)
-
 
 
             // console.log(this.dataset.movieId)
