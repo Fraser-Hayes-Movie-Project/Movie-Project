@@ -131,7 +131,7 @@ getMovies().then((movies) => {
 
     console.log(movies)
     movies.forEach((movie) => {
-        console.log(movie.id)
+
         $('#movies-div').append(
             `<div class="card col-md-4" id="${movie.id}">
             <h3 class="card-title">${capitalizeName(movie.title)}</h3>
@@ -143,46 +143,18 @@ getMovies().then((movies) => {
             
             
 <!-- Trigger/Open The Modal -->
-<button class="myBtn">Open Modal</button>
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Edit a movie!</h3>
-
-            <h4>Movie you would like to edit:</h4>
-
-            <label for="movie-title-new" >NEW Movie Title:</label>
-            <br>
-            <input type="text" id="movie-title-new">
-            <br>
-            <label for="movie-rating-new">NEW Movie Rating:</label>
-            <br>
-            <input type="text" id="movie-rating-new">
-            <br>
-            <button type="button" id="submit" >Submit</button>
-
-
-        </div>
-    </div>
-
-</div>
+<button class="myBtn" data-movie-id="${movie.id}" data-movie-title="${movie.title}" data-movie-rating="${movie.rating}">Open Modal</button>
 
 
 
-            
-
-            <button type="button"class="btn btn-primary float-right">Delete</button>
+            <button type="button" class="btn btn-primary float-right">Delete</button>
             
             
             </div>
-            </div> `
-        )
-        loopingButtons()});
+            </div> `)
+        });
+
+loopButton();
 
 
 })
@@ -250,31 +222,36 @@ This changes the movie data, but we need to do two things.
 /* MODAL SETTINGS */
 
 // Gets the modal
-var modal = document.getElementById("myModal");
+var modal = document.getElementById("modal");
+console.log(modal)
 
 // Gets the button that opens the modal
-var btns = document.getElementsByClassName("myBtn");
+var btn = document.getElementsByClassName("myBtn");
+
 
 // Gets the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
 
-function loopingButtons() {
-    for (var i = 0; i < btns.length; i++) {
-        btns[i].addEventListener('click', function (e) {
+function loopButton() {
+    for (var i = 0; i < btn.length; i++) {
+        console.log("hi")
+        btn[i].addEventListener('click', function (e) {
             modal.style.display = "block";
+            console.log(this.dataset.movieTitle)
+
+            document.getElementById("movie-title-new").value = this.dataset.movieTitle;
+
         });
-    }
-}
+    }}
 
 
 
-
-// When the user clicks on <span> (x), close the modal
-// span.addEventListener('click', function (e) {
-//     modal.style.display = "none";
-// })
+//When the user clicks on <span> (x), close the modal
+span.addEventListener('click', function (e) {
+    modal.style.display = "none";
+})
 
 // When the user clicks anywhere outside of the modal, close it
 window.addEventListener('click', function (e) {
