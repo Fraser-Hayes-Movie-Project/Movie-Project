@@ -120,12 +120,21 @@ getMovies().then((movies) => {
 
     $('#loader').css('display', 'none');
 
-    console.log(movies)
-    movies.forEach( movie => {
+    function capitalizeName(str) {
+        var array = str.split(" ");
+        for (var i = 0; i < array.length; i++) {
+            array[i] = array[i].charAt(0).toUpperCase() + array[i].slice(1).toLowerCase()
+        }
+        var strTwo = array.join(" ");
+        return strTwo;
+    }
 
+    console.log(movies)
+    movies.forEach((movie) => {
+console.log(movie)
         $('#movies-div').append(
             `<div class="card col-md-4">
-            <h3 class="card-title">${movie.title}</h3>
+            <h3 class="card-title">${capitalizeName(movie.title)}</h3>
             <h6 class="card-text">${movie.genre}</h6>
             <img class="card-img-top" src="${movie.poster}">
              <div class="card-body">
@@ -133,10 +142,10 @@ getMovies().then((movies) => {
             <p class="card-text">Rating: ${movie.rating}</p>
             
         <!-- Trigger/Open The Modal -->
-<button id="myBtn">Open Modal</button>
+<button class="myBtn">Open Modal</button>
 
 <!-- The Modal -->
-<div id="myModal" class="modal">
+<div id="myModal${movie.id}" class="modal myModal">
 
     <!-- Modal content -->
     <div class="modal-content">
@@ -145,12 +154,10 @@ getMovies().then((movies) => {
             <h3>Edit a movie!</h3>
 
             <h4>Movie you would like to edit:</h4>
-
-            <label for="movie-title-new">NEW Movie Title:</label>
             <br>
-            <input type="text" id="movie-title-new">
+            <h1>${movie.title}</h1>
+            <input type="text" id="movie-title-new" value="${movie.title}">
             <br>
-            <label for="movie-rating-new">NEW Movie Rating:</label>
             <br>
             <input type="text" id="movie-rating-new">
             <br>
@@ -162,18 +169,14 @@ getMovies().then((movies) => {
 
 </div>
             
-            
-            
-            
-            
-            
+
             <button type="button"class="btn btn-primary float-right">Delete</button>
             
             
             </div>
             </div>`
         )
-    });
+        loopingButtons()});
 
 
 })
@@ -207,11 +210,13 @@ button.addEventListener('click', function (e) {
     var movieTitleEditInput = movieTitleEdit.value
     var movieRatingEditInput = movieRatingEdit.value
 
+    console.log(movieTitleEditInput)
+    console.log(movieRatingEditInput)
 
     let editedMovie = {
         title: movieTitleEditInput,
         rating: movieRatingEditInput,
-        id: movieNumberInput
+        // id: movieNumberInput
     };
 
     function editMovie(data) {
@@ -242,24 +247,32 @@ button.addEventListener('click', function (e) {
 var modal = document.getElementById("myModal");
 
 // Gets the button that opens the modal
-var btn = document.getElementById("myBtn");
+var btns = document.getElementsByClassName("myBtn");
 
 // Gets the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
-btn.onclick = function() {
-    modal.style.display = "block";
+
+function loopingButtons() {
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', function (e) {
+            modal.style.display = "block";
+        });
+    }
 }
+
+
+
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+span.addEventListener('click', function (e) {
     modal.style.display = "none";
-}
+})
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.addEventListener('click', function (e) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-}
+});
