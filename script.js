@@ -131,9 +131,9 @@ getMovies().then((movies) => {
 
     console.log(movies)
     movies.forEach((movie) => {
-console.log(movie)
+        console.log(movie.id)
         $('#movies-div').append(
-            `<div class="card col-md-4">
+            `<div class="card col-md-4" id="${movie.id}">
             <h3 class="card-title">${capitalizeName(movie.title)}</h3>
             <h6 class="card-text">${movie.genre}</h6>
             <img class="card-img-top" src="${movie.poster}">
@@ -141,40 +141,21 @@ console.log(movie)
             <p class="card-text">${movie.plot}</p>
             <p class="card-text">Rating: ${movie.rating}</p>
             
+            
         <!-- Trigger/Open The Modal -->
 <button class="myBtn">Open Modal</button>
 
 <!-- The Modal -->
-<div id="myModal${movie.id}" class="modal myModal">
+<!--  <div id="myModal" class="modal myModal">-->
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Edit a movie!</h3>
 
-            <h4>Movie you would like to edit:</h4>
-            <br>
-            <h1>${movie.title}</h1>
-            <input type="text" id="movie-title-new" value="${movie.title}">
-            <br>
-            <br>
-            <input type="text" id="movie-rating-new">
-            <br>
-            <button type="button" id="submit" >Submit</button>
-
-            </form>
-        </div>
-    </div>
-
-</div>
             
 
             <button type="button"class="btn btn-primary float-right">Delete</button>
             
             
             </div>
-            </div>`
+            </div> `
         )
         loopingButtons()});
 
@@ -200,46 +181,46 @@ This changes the movie data, but we need to do two things.
 
 * */
 
-var button = document.getElementById("submit");
-
-button.addEventListener('click', function (e) {
-
-    e.preventDefault()
-
-    // var movieNumberInput = movieNumber.value
-    var movieTitleEditInput = movieTitleEdit.value
-    var movieRatingEditInput = movieRatingEdit.value
-
-    console.log(movieTitleEditInput)
-    console.log(movieRatingEditInput)
-
-    let editedMovie = {
-        title: movieTitleEditInput,
-        rating: movieRatingEditInput,
-        // id: movieNumberInput
-    };
-
-    function editMovie(data) {
-
-        let options = {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data) //converts the JS Object into a JSON string
-            // before sending it up to the server.
-        }
-        return fetch(`${movieAPI}/${data.id}`, options)
-            .then((response) => response.json())
-
-    }
-
-    editMovie(editedMovie).then((data) => {
-        console.log(data)
-        location.reload(true);
-    });
-
-});
+// var button = document.getElementById("submit");
+//
+// button.addEventListener('click', function (e) {
+//
+//     e.preventDefault()
+//
+//     // var movieNumberInput = movieNumber.value
+//     var movieTitleEditInput = movieTitleEdit.value
+//     var movieRatingEditInput = movieRatingEdit.value
+//
+//     console.log(movieTitleEditInput)
+//     console.log(movieRatingEditInput)
+//
+//     let editedMovie = {
+//         title: movieTitleEditInput,
+//         rating: movieRatingEditInput,
+//         // id: movieNumberInput
+//     };
+//
+//     function editMovie(data) {
+//
+//         let options = {
+//             method: "PUT",
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify(data) //converts the JS Object into a JSON string
+//             // before sending it up to the server.
+//         }
+//         return fetch(`${movieAPI}/${data.id}`, options)
+//             .then((response) => response.json())
+//
+//     }
+//
+//     editMovie(editedMovie).then((data) => {
+//         console.log(data)
+//         location.reload(true);
+//     });
+//
+// });
 
 /* MODAL SETTINGS */
 
@@ -266,9 +247,9 @@ function loopingButtons() {
 
 
 // When the user clicks on <span> (x), close the modal
-span.addEventListener('click', function (e) {
-    modal.style.display = "none";
-})
+// span.addEventListener('click', function (e) {
+//     modal.style.display = "none";
+// })
 
 // When the user clicks anywhere outside of the modal, close it
 window.addEventListener('click', function (e) {
