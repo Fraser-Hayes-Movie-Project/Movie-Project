@@ -132,8 +132,41 @@ getMovies().then((movies) => {
             <p class="card-text">${movie.plot}</p>
             <p class="card-text">Rating: ${movie.rating}</p>
             
-        
-            <button type="button"class="btn btn-primary">Edit</button>
+        <!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Edit a movie!</h3>
+
+            <h4>Movie you would like to edit:</h4>
+
+            <label for="movie-title-new">NEW Movie Title:</label>
+            <br>
+            <input type="text" id="movie-title-new">
+            <br>
+            <label for="movie-rating-new">NEW Movie Rating:</label>
+            <br>
+            <input type="text" id="movie-rating-new">
+            <br>
+            <button type="button" id="submit" >Submit</button>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+            
+            
+            
+            
+            
+            
             <button type="button"class="btn btn-primary float-right">Delete</button>
             
             
@@ -150,7 +183,7 @@ getMovies().then((movies) => {
 
 /* --------------- EDIT MOVIE SECTION ---------------  */
 
-var movieNumber = document.getElementById('movie-number');
+// var movieNumber = document.getElementById('movie-number');
 var movieTitleEdit = document.getElementById('movie-title-new');
 var movieRatingEdit = document.getElementById('movie-rating-new');
 
@@ -170,7 +203,7 @@ button.addEventListener('click', function (e) {
 
     e.preventDefault()
 
-    var movieNumberInput = movieNumber.value
+    // var movieNumberInput = movieNumber.value
     var movieTitleEditInput = movieTitleEdit.value
     var movieRatingEditInput = movieRatingEdit.value
 
@@ -203,13 +236,15 @@ button.addEventListener('click', function (e) {
 
 });
 
-// Get the modal
+/* MODAL SETTINGS */
+
+// Gets the modal
 var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
+// Gets the button that opens the modal
 var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
+// Gets the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
