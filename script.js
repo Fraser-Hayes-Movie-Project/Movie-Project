@@ -29,19 +29,7 @@ form is submitted.
 
 /* Used this function to clean up movies object */
 
-function deleteMovie(id) {
-    let options = {
-        method: "DELETE",
-        headers: {
-            'Content-Type': 'db/json',
-        },
-    }
-    fetch(`${movieAPI}/${id}`, options)
-        .then((response) =>
-            console.log("Deleted movie with id:" + id, response))
-}
 
-// deleteMovie(6)
 
 
 /* Variables declared outside of function so they can be passed in. */
@@ -143,19 +131,20 @@ getMovies().then((movies) => {
             
             
 <!-- Trigger/Open The Modal -->
-<button class="myBtn" data-movie-id="${movie.id}" data-movie-title="${movie.title}" data-movie-rating="${movie.rating}">Open Modal</button>
+<button class="btn btn-primary myBtn" data-movie-id="${movie.id}" data-movie-title="${movie.title}" data-movie-rating="${movie.rating}">Edit Movie</button>
 
 
 
-            <button type="button" class="btn btn-primary float-right">Delete</button>
+            <button type="button" class="btn btn-primary float-right btnDelete" data-movie-id="${movie.id}">Delete</button>
             
             
             </div>
             </div> `)
         });
 
-loopButton();
+editButton();
 
+deleteButton();
 
 })
 
@@ -167,6 +156,7 @@ loopButton();
 // var movieNumber = document.getElementById('movie-number');
 var movieTitleEdit = document.getElementById('movie-title-new');
 var movieRatingEdit = document.getElementById('movie-rating-new');
+var movieId = document.getElementById('movie-id');
 
 /* NOTE FOR ME:
 
@@ -178,46 +168,46 @@ This changes the movie data, but we need to do two things.
 
 * */
 
-// var button = document.getElementById("submit");
-//
-// button.addEventListener('click', function (e) {
-//
-//     e.preventDefault()
-//
-//     // var movieNumberInput = movieNumber.value
-//     var movieTitleEditInput = movieTitleEdit.value
-//     var movieRatingEditInput = movieRatingEdit.value
-//
-//     console.log(movieTitleEditInput)
-//     console.log(movieRatingEditInput)
-//
-//     let editedMovie = {
-//         title: movieTitleEditInput,
-//         rating: movieRatingEditInput,
-//         // id: movieNumberInput
-//     };
-//
-//     function editMovie(data) {
-//
-//         let options = {
-//             method: "PUT",
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify(data) //converts the JS Object into a JSON string
-//             // before sending it up to the server.
-//         }
-//         return fetch(`${movieAPI}/${data.id}`, options)
-//             .then((response) => response.json())
-//
-//     }
-//
-//     editMovie(editedMovie).then((data) => {
-//         console.log(data)
-//         location.reload(true);
-//     });
-//
-// });
+var button = document.getElementById("submit");
+
+button.addEventListener('click', function (e) {
+
+    e.preventDefault()
+
+    var movieNumberInput = movieId.value
+    var movieTitleEditInput = movieTitleEdit.value
+    var movieRatingEditInput = movieRatingEdit.value
+
+    console.log(movieTitleEditInput)
+    console.log(movieRatingEditInput)
+
+    let editedMovie = {
+        title: movieTitleEditInput,
+        rating: movieRatingEditInput,
+        id: movieNumberInput
+    };
+
+    function editMovie(data) {
+
+        let options = {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data) //converts the JS Object into a JSON string
+            // before sending it up to the server.
+        }
+        return fetch(`${movieAPI}/${data.id}`, options)
+            .then((response) => response.json())
+
+    }
+
+    editMovie(editedMovie).then((data) => {
+        console.log(data)
+        location.reload(true);
+    });
+
+});
 
 /* MODAL SETTINGS */
 
@@ -228,25 +218,55 @@ console.log(modal)
 // Gets the button that opens the modal
 var btn = document.getElementsByClassName("myBtn");
 
-
 // Gets the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on the button, open the modal
+var btnDelete = document.getElementsByClassName("btnDelete");
 
-function loopButton() {
+
+// When the user clicks on any button, open the modal and store the given movie data
+
+function editButton() {
     for (var i = 0; i < btn.length; i++) {
-        console.log("hi")
         btn[i].addEventListener('click', function (e) {
             modal.style.display = "block";
             console.log(this.dataset.movieTitle)
 
             document.getElementById("movie-title-new").value = this.dataset.movieTitle;
-
+            document.getElementById("movie-rating-new").value = this.dataset.movieRating;
+            document.getElementById("movie-id").value = this.dataset.movieId;
         });
     }}
 
 
+function deleteMovie(id) {
+    let options = {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'db/json',
+        },
+    }
+    fetch(`${movieAPI}/${id}`, options)
+        .then((response) =>
+            console.log("Deleted movie with id:" + id, response))
+}
+
+// deleteMovie(6)
+
+
+function deleteButton() {
+    for (var i = 0; i < btnDelete.length; i++) {
+        console.log("hi")
+        btnDelete[i].addEventListener('click', function (e) {
+            e.preventDefault();
+            deleteMovie(this.dataset.movieId)
+
+
+
+            // console.log(this.dataset.movieId)
+})}
+
+}
 
 //When the user clicks on <span> (x), close the modal
 span.addEventListener('click', function (e) {

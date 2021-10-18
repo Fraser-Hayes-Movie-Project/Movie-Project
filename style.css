@@ -51,7 +51,7 @@
 /* The Close Button */
 .close {
     color: #aaaaaa;
-    margin-left: 850px;
+    margin-left: 750px;
     font-size: 28px;
     font-weight: bold;
 }
@@ -61,4 +61,8 @@
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.hide {
+    display: none;
 }
