@@ -142,11 +142,36 @@ getMovies().then((movies) => {
             <p class="card-text">Rating: ${movie.rating}</p>
             
             
-        <!-- Trigger/Open The Modal -->
+<!-- Trigger/Open The Modal -->
 <button class="myBtn">Open Modal</button>
 
 <!-- The Modal -->
-<!--  <div id="myModal" class="modal myModal">-->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Edit a movie!</h3>
+
+            <h4>Movie you would like to edit:</h4>
+
+            <label for="movie-title-new" >NEW Movie Title:</label>
+            <br>
+            <input type="text" id="movie-title-new">
+            <br>
+            <label for="movie-rating-new">NEW Movie Rating:</label>
+            <br>
+            <input type="text" id="movie-rating-new">
+            <br>
+            <button type="button" id="submit" >Submit</button>
+
+
+        </div>
+    </div>
+
+</div>
+
 
 
             
