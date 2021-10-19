@@ -12,9 +12,27 @@ function searchForAMovie(movieName) {
     const options = {
         method: 'GET'
     };
+
+
     fetch(url, options)
         .then(response => response.json())
-        .then(data => (console.log(data)))
+        .then((data) => {
+            console.log(data);
+            console.log(data.Search);
+
+            data.Search.forEach((movie) =>{
+                console.log(movie);
+                $('#movies-div').append(
+                    `<div className="flip-card-front">
+                        <img className="card-img-top" src="${movie.poster}">
+                    </div>`
+               )
+            })
+
+
+            }
+
+        )
         .catch(error => alert("We couldn't find your movie. Sorry!"));
     // error handeling
 
@@ -22,31 +40,30 @@ function searchForAMovie(movieName) {
 
 // console.log(searchForAMovie(omdbUserInput))
 $( document ).ready(function() {
-
     $('#omdb-btn').on("click", function (e) {
         e.preventDefault()
         var omdbUserInput = $('#site-search').val()
-        console.log(omdbUserInput)
+        //console.log(omdbUserInput)
         searchForAMovie(omdbUserInput)
 
 
 
-        omdbUserInput.forEach((movie) => {
-            console.log(movie)
-            $('#omdb-div').append(
-                `<div class="card col-md-4 flip-card" id="${movie.search.imdbID}">
-            <div class="flip-card-inner">
-            
-            <div class="flip-card-front">
-            <img class="card-img-top" src="${movie.search.Poster}">
-            </div>
-            
-            <div class="flip-card-back">
-            <h3 class="card-title">${movie.search.Title}</h3>
-            <h6 class="card-text">${movie.search.Year}</h6>
-             <div class="card-body">`
-            )
-        })
+        // omdbUserInput.forEach((movie) => {
+        //     console.log(movie)
+        //     $('#omdb-div').append(
+        //         `<div class="card col-md-4 flip-card" id="${movie.search.imdbID}">
+        //     <div class="flip-card-inner">
+        //
+        //     <div class="flip-card-front">
+        //     <img class="card-img-top" src="${movie.search.Poster}">
+        //     </div>
+        //
+        //     <div class="flip-card-back">
+        //     <h3 class="card-title">${movie.search.Title}</h3>
+        //     <h6 class="card-text">${movie.search.Year}</h6>
+        //      <div class="card-body">`
+        //     )
+        // })
     })
 })
 
