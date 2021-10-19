@@ -4,7 +4,7 @@ console.log("Hooked up")
 
 var movieAPI = "https://obsidian-dune-boater.glitch.me/movies";
 
-console.log(movieAPI);
+
 
 /* TODO'S:
 
@@ -36,6 +36,9 @@ form is submitted.
 
 var movieTitleCustom = document.getElementById('movie-title-custom');
 var movieRatingCustom = document.getElementById('movie-rating-custom');
+var movieGenreCustom = document.getElementById('movie-genre-custom');
+var movieDescCustom = document.getElementById('movie-description-custom');
+var movieImageCustom = document.getElementById('url');
 var button2 = document.getElementById("add-movie");
 
 
@@ -55,11 +58,17 @@ button2.addEventListener('click', function (e) {
     e.preventDefault()
     var movieTitleInput = movieTitleCustom.value
     var movieRatingInput = movieRatingCustom.value
+    var movieGenreInput = movieGenreCustom.value
+    var movieDescInput = movieDescCustom.value
+    var movieURLInput = movieImageCustom.value
     console.log(movieTitleInput + " " + movieRatingInput)
 
     let newMovie = {
         title: movieTitleInput,
-        rating: movieRatingInput
+        rating: movieRatingInput,
+        genre: movieGenreInput,
+        plot: movieDescInput,
+        poster: movieURLInput
     };
 
     /* Allows user's input to be sent to database */
@@ -121,25 +130,45 @@ getMovies().then((movies) => {
     movies.forEach((movie) => {
 
         $('#movies-div').append(
-            `<div class="card col-md-4" id="${movie.id}">
+
+
+
+            `<div class="card col-md-4 flip-card" id="${movie.id}">
+            <div class="flip-card-inner">
+            
+            <div class="flip-card-front">
+            <img class="card-img-top" src="${movie.poster}">
+            </div>
+            
+            <div class="flip-card-back">
             <h3 class="card-title">${capitalizeName(movie.title)}</h3>
             <h6 class="card-text">${movie.genre}</h6>
-            <img class="card-img-top" src="${movie.poster}">
              <div class="card-body">
             <p class="card-text">${movie.plot}</p>
             <p class="card-text">Rating: ${movie.rating}</p>
             
             
+      
+            
 <!-- Trigger/Open The Modal -->
-<button class="btn btn-primary myBtn" data-movie-id="${movie.id}" data-movie-title="${movie.title}" data-movie-rating="${movie.rating}">Edit Movie</button>
+<button class="btn btn-primary myBtn float-left" 
+data-movie-id="${movie.id}" 
+data-movie-title="${movie.title}" 
+data-movie-rating="${movie.rating}"
+data-movie-genre="${movie.genre}"
+data-movie-description="${movie.plot}"
+data-movie-poster="${movie.poster}"
+>Edit Movie<img class="pencil" src="https://cdn-icons.flaticon.com/png/512/2280/premium/2280557.png?token=exp=1634617541~hmac=e8530c8cf47886059196b1b3691c00eb"</button>
 
 
 
-            <button type="button" class="btn btn-primary float-right btnDelete" data-movie-id="${movie.id}">Delete</button>
-            
-            
+            <button type="button" class="btn btn-primary float-right btnDelete" data-movie-id="${movie.id}">Delete<img class="trash" src="https://cdn-icons.flaticon.com/png/512/914/premium/914343.png?token=exp=1634617657~hmac=b68b1200b09ac1f0ec5ecc65197d7034"></button>
+   
+           </div>
             </div>
-            </div> `)
+            </div>
+            </div> <!-- FLip card animation stops here  -->    
+             `)
         });
 
 editButton();
@@ -157,6 +186,9 @@ deleteButton();
 var movieTitleEdit = document.getElementById('movie-title-new');
 var movieRatingEdit = document.getElementById('movie-rating-new');
 var movieId = document.getElementById('movie-id');
+var movieGenreEdit = document.getElementById('movie-genre-new');
+var movieDescEdit = document.getElementById('movie-description-new');
+var movieURLEdit = document.getElementById('movie-image-new');
 
 /* NOTE FOR ME:
 
@@ -177,6 +209,9 @@ button.addEventListener('click', function (e) {
     var movieNumberInput = movieId.value
     var movieTitleEditInput = movieTitleEdit.value
     var movieRatingEditInput = movieRatingEdit.value
+    var movieGenreEditInput = movieGenreEdit.value
+    var movieDescEditInput = movieDescEdit.value
+    var movieURLEditInput = movieURLEdit.value
 
     console.log(movieTitleEditInput)
     console.log(movieRatingEditInput)
@@ -184,7 +219,10 @@ button.addEventListener('click', function (e) {
     let editedMovie = {
         title: movieTitleEditInput,
         rating: movieRatingEditInput,
-        id: movieNumberInput
+        id: movieNumberInput,
+        genre: movieGenreEditInput,
+        plot: movieDescEditInput,
+        poster: movieURLEditInput,
     };
 
     function editMovie(data) {
@@ -213,7 +251,7 @@ button.addEventListener('click', function (e) {
 
 // Gets the modal
 var modal = document.getElementById("modal");
-console.log(modal)
+// console.log(modal)
 
 // Gets the button that opens the modal
 var btn = document.getElementsByClassName("myBtn");
@@ -235,6 +273,9 @@ function editButton() {
             document.getElementById("movie-title-new").value = this.dataset.movieTitle;
             document.getElementById("movie-rating-new").value = this.dataset.movieRating;
             document.getElementById("movie-id").value = this.dataset.movieId;
+            document.getElementById("movie-genre-new").value = this.dataset.movieGenre;
+            document.getElementById("movie-description-new").value = this.dataset.movieDescription;
+            document.getElementById("movie-image-new").value = this.dataset.moviePoster;
         });
     }}
 

@@ -4,29 +4,78 @@
     <meta charset="UTF-8">
     <title>Movie Project</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Movie Portal</h1>
+<section class="title-section">
+
+    <h1 class="title border-img"><img class="film-2" src="https://cdn-icons-png.flaticon.com/512/1016/1016813.png">Lone<img class="star-big" src="https://cdn-icons.flaticon.com/png/512/477/premium/477406.png?token=exp=1634605625~hmac=000b1e33417d6487b5a20da49d72a1e4">Productions<img class="film" src="https://cdn-icons-png.flaticon.com/512/1016/1016813.png"></h1>
+</section>
+
+<div class="bean"> <!-- BOTTOM BEAN BORDER -->
+
+    </br>
+    </br>
+    </br>
+
+</div>
+
+<section class="movies-section">
 
 <div id="loader" class="center"></div>
 
-<form id="add-movie-form">
+<h3 class="add-movie-title"><img class="star-2" src="https://cdn-icons.flaticon.com/png/512/782/premium/782980.png?token=exp=1634611559~hmac=0df3beb252f47d57c426cb0f6385d643">Add your favorite movie<img class="star" src="https://cdn-icons.flaticon.com/png/512/782/premium/782980.png?token=exp=1634611559~hmac=0df3beb252f47d57c426cb0f6385d643"> </h3>
 
-    <h3>Add your favorite movie!</h3>
+<div class="row">
 
-    <label for="movie-title-custom">Movie Title:</label>
+        <form id="add-movie-form">
+
+            <label for="movie-title-custom" class="mini-title">Movie Title:</label>
+            <br>
+            <input type="text" id="movie-title-custom" size="50">
+
+            <br>
+            <label for="movie-rating-custom" class="mini-title">Movie Rating:</label>
+            <br>
+            <input type="text" id="movie-rating-custom" size="50">
+
+            <br>
+            <label for="movie-genre-custom" class="mini-title">Movie Genre:</label>
+            <br>
+            <input type="text" id="movie-genre-custom" size="50">
+
+            <br>
+            <label for="movie-description-custom" class="mini-title">Description:</label>
+            <br>
+            <input type="text" id="movie-description-custom" size="50">
+
+            <br>
+            <label for="url" class="mini-title">Poster (Image URL):</label>
+            <br>
+            <input type="url" name="url" id="url" size="50">
+
+
+            <br>
+            <br>
+            <button type="button" class="btn btn-primary" id="add-movie" >Add Movie</button>
+
+        </form>
+
+</div>
+
     <br>
-    <input type="text" id="movie-title-custom">
-    <br>
-    <label for="movie-rating-custom">Movie Rating:</label>
-    <br>
-    <input type="text" id="movie-rating-custom">
 
-    <button type="button" class="" id="add-movie" >Add Movie</button>
+    <div class="bean-2"> <!-- BOTTOM BEAN BORDER -->
 
-</form>
+        </br>
+        </br>
+        </br>
+
+    </div>
 
 <!-- The Modal -->
 <div id="modal" class="modal">
@@ -37,25 +86,46 @@
             <span class="close">&times;</span>
             <h3>Edit a movie!</h3>
 
-
+            <div class="form-group">
             <form>
+
                 <div class="hide">
                 <label for="movie-id">Movie ID:</label>
                 <br>
-                <input type="text" id="movie-id">
+                <input type="text" class="input-large search-query" id="movie-id" size="50">
                 </div>
 
                 <br>
-                <label for="movie-title-new">Movie Title:</label>
+                <label for="movie-title-new">Title:</label>
                 <br>
-                <input type="text" id="movie-title-new">
+                <input type="text" id="movie-title-new" size="50">
+
                 <br>
-                <label for="movie-rating-new">Movie Rating:</label>
+                <label for="movie-rating-new">Rating:</label>
                 <br>
-                <input type="text" id="movie-rating-new">
+                <input type="text" id="movie-rating-new" size="50">
+
                 <br>
-                <button type="button" id="submit" >Submit</button>
+                <label for="movie-genre-new">Genre:</label>
+                <br>
+                <input type="text" id="movie-genre-new" size="50">
+
+
+                <br>
+                <label for="movie-description-new">Description:</label>
+                <br>
+                <input type="text" id="movie-description-new" size="50">
+
+                <br>
+                <label for="movie-image-new">Poster (Image URL):</label>
+                <br>
+                <input type="text" id="movie-image-new" size="50">
+
+
+                <br>
+                <button type="button" class="btn btn-primary" id="submit" >Submit</button>
             </form>
+        </div>
 
         </div>
     </div>
@@ -63,12 +133,16 @@
 </div>
 
 
-<div class="row" id="movies-div"></div>
+
+<div class="row movies-display" id="movies-div"></div>
+
+</section>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="keys.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
