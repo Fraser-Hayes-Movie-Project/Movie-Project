@@ -29,21 +29,25 @@ $( document ).ready(function() {
         console.log(omdbUserInput)
         searchForAMovie(omdbUserInput)
 
+
+
         omdbUserInput.forEach((movie) => {
+            console.log(movie)
             $('#omdb-div').append(
-                `<div class="card col-md-4 flip-card" id="${movie.id}">
+                `<div class="card col-md-4 flip-card" id="${movie.search.imdbID}">
             <div class="flip-card-inner">
             
             <div class="flip-card-front">
-            <img class="card-img-top" src="${movie.Poster}">
+            <img class="card-img-top" src="${movie.search.Poster}">
             </div>
             
             <div class="flip-card-back">
-            <h3 class="card-title">${movie.Title}</h3>
-            <h6 class="card-text">${movie.Year}</h6>
+            <h3 class="card-title">${movie.search.Title}</h3>
+            <h6 class="card-text">${movie.search.Year}</h6>
              <div class="card-body">`
             )
         })
+    })
 })
 
 
@@ -357,8 +361,8 @@ span.addEventListener('click', function (e) {
 })
 
 // When the user clicks anywhere outside of the modal, close it
-window.addEventListener('click', function (e) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-})
+    window.addEventListener('click', function (e) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    });
