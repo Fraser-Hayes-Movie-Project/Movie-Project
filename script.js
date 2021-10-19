@@ -4,36 +4,56 @@ console.log("Hooked up")
 
 var movieAPI = "https://obsidian-dune-boater.glitch.me/movies";
 
-
-
 function searchForAMovie(movieName) {
-    const url = `http://www.omdbapi.com/?i=tt3896198&apikey=5a824055&s=${movieName}`;
+    const url = `http://www.omdbapi.com/?i=tt3896198&apikey=5a824055&t=${movieName}&plot=full`;
     // console.log(url);
     const options = {
-        method: 'GET'
+        method: 'GET',
     };
 
 
     fetch(url, options)
         .then(response => response.json())
         .then((data) => {
-            console.log(data);
-            console.log(data.Search);
+            console.log(data)
+            console.log(data.Plot);
+            // console.log(data.Title);
+            alert("Your search has been added to your favorite movies!")
 
-            data.Search.forEach((movie) =>{
-                console.log(movie);
+
                 $('#movies-div').append(
-                    `<div className="flip-card-front">
-                        <img className="card-img-top" src="${movie.poster}">
-                    </div>`
-               )
-            })
+                    `
+                <div class="card col-md-4 flip-card" id="${data.imdbID}">
+                <div class="flip-card-inner">
+                
+                
+                    <div class="flip-card-front">
+                        <img class="card-img-top" src="${data.Poster}">
+                    </div>
+                      <div class="flip-card-back">
+                        <h3 class="card-title">${data.Title}</h3>
+                         <h6 class="card-text">${data.Genre}</h6>
+                        <div class="card-body">
+                        <p class="card-text">${data.Plot}</p>
+                        <p class="card-text">Rating: ${data.imdbRating}</p>
+                        
+                        <button type="button" class="btn btn-primary">You cannot edit or delete this movie!</button>
+                        
+                    </div>
+                    
+                   
+                </div>
+                    
+                    
+                </div>    
+                </div>`
+            )
 
 
             }
 
         )
-        .catch(error => alert("We couldn't find your movie. Sorry!"));
+        .catch(error => console.log((error)));
     // error handeling
 
 }

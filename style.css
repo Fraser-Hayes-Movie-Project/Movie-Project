@@ -129,6 +129,16 @@ html {
     background-color: #420C09;
 }
 
+.fav-movies {
+    padding: 70px;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 60px;
+    background-color: #420C09;
+    color: white;
+    margin-bottom: -10px;
+}
+
 /* ADD MOVIE FORM SECTION */
 
 .add-movie-title {
@@ -179,6 +189,17 @@ html {
 
 .btn-primary:hover {
     background-color: #420C09 !important;
+}
+
+.movie-reel {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.data-search {
+    margin-top: 275px;
 }
 
 /* MOVIES DIV SECTION */

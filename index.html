@@ -28,7 +28,7 @@
 
 <div id="loader" class="center"></div>
 
-<h3 class="add-movie-title"><img class="star-2" src="https://cdn-icons.flaticon.com/png/512/782/premium/782980.png?token=exp=1634611559~hmac=0df3beb252f47d57c426cb0f6385d643">Add your favorite movie<img class="star" src="https://cdn-icons.flaticon.com/png/512/782/premium/782980.png?token=exp=1634611559~hmac=0df3beb252f47d57c426cb0f6385d643"> </h3>
+<h3 class="add-movie-title"><img class="star-2" src="https://cdn-icons.flaticon.com/png/512/782/premium/782980.png?token=exp=1634611559~hmac=0df3beb252f47d57c426cb0f6385d643">Add your favorite movies<img class="star" src="https://cdn-icons.flaticon.com/png/512/782/premium/782980.png?token=exp=1634611559~hmac=0df3beb252f47d57c426cb0f6385d643"> </h3>
 
 <div class="row">
 
@@ -64,17 +64,26 @@
             <button type="button" class="btn btn-primary" id="add-movie" >Add Movie</button>
 
         </form>
-        <form>
-            <label for="site-search">Search OMDB:</label>
-            <input type="text" id="site-search" name="q"
-                   aria-label="Search through site content">
 
-            <button  id="omdb-btn">Search</button>
+
+        <form>
+
+
+
+            <label for="site-search" class="mini-title data-search">Search in Database:</label><img class="movie-reel" src="https://cdn-icons.flaticon.com/png/512/4096/premium/4096505.png?token=exp=1634672276~hmac=c10e74b57789bfbe42e938dc20a86b17">
+
+            <br>
+            <input type="text" id="site-search" name="q" size="50">
+                    <br>
+                    <br>
+            <button id="omdb-btn" class="btn btn-primary">Search</button>
         </form>
 
 </div>
 
     <br>
+
+    <h3 class="fav-movies">My Favorite Movies</h3>
 
     <div class="bean-2"> <!-- BOTTOM BEAN BORDER -->
 
@@ -143,7 +152,6 @@
 
 <div class="row movies-display" id="movies-div"></div>
 
-    <div class="row movies-omdb" id="omdb-div"></div>
 
 </section>
 
