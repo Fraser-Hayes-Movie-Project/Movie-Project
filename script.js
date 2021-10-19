@@ -6,6 +6,48 @@ var movieAPI = "https://obsidian-dune-boater.glitch.me/movies";
 
 
 
+function searchForAMovie(movieName) {
+    const url = `http://www.omdbapi.com/?i=tt3896198&apikey=5a824055&s=${movieName}`;
+    // console.log(url);
+    const options = {
+        method: 'GET'
+    };
+    fetch(url, options)
+        .then(response => response.json())
+        .then(data => (console.log(data)))
+        .catch(error => alert("We couldn't find your movie. Sorry!"));
+    // error handeling
+
+}
+
+// console.log(searchForAMovie(omdbUserInput))
+$( document ).ready(function() {
+
+    $('#omdb-btn').on("click", function (e) {
+        e.preventDefault()
+        var omdbUserInput = $('#site-search').val()
+        console.log(omdbUserInput)
+        searchForAMovie(omdbUserInput)
+
+        omdbUserInput.forEach((movie) => {
+            $('#omdb-div').append(
+                `<div class="card col-md-4 flip-card" id="${movie.id}">
+            <div class="flip-card-inner">
+            
+            <div class="flip-card-front">
+            <img class="card-img-top" src="${movie.Poster}">
+            </div>
+            
+            <div class="flip-card-back">
+            <h3 class="card-title">${movie.Title}</h3>
+            <h6 class="card-text">${movie.Year}</h6>
+             <div class="card-body">`
+            )
+        })
+})
+
+
+
 /* TODO'S:
 
 Allow users to add new movies -- ALL SPECIFICATIONS DONE
@@ -319,4 +361,4 @@ window.addEventListener('click', function (e) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-});
+})

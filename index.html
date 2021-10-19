@@ -64,6 +64,13 @@
             <button type="button" class="btn btn-primary" id="add-movie" >Add Movie</button>
 
         </form>
+        <form>
+            <label for="site-search">Search OMDB:</label>
+            <input type="text" id="site-search" name="q"
+                   aria-label="Search through site content">
+
+            <button  id="omdb-btn">Search</button>
+        </form>
 
 </div>
 
@@ -135,6 +142,8 @@
 
 
 <div class="row movies-display" id="movies-div"></div>
+
+    <div class="row movies-omdb" id="omdb-div"></div>
 
 </section>
 
