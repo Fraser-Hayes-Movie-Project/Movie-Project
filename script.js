@@ -15,10 +15,10 @@ function searchForAMovie(movieName) {
     fetch(url, options)
         .then(response => response.json())
         .then((data) => {
-            console.log(data)
-            console.log(data.Plot);
-            // console.log(data.Title);
-            alert("Your search has been added to your favorite movies!")
+                console.log(data)
+                console.log(data.Plot);
+                // console.log(data.Title);
+                alert("Your search has been added to your favorite movies!")
 
 
                 $('#movies-div').append(
@@ -47,7 +47,7 @@ function searchForAMovie(movieName) {
                     
                 </div>    
                 </div>`
-            )
+                )
 
 
             }
@@ -90,19 +90,13 @@ $( document ).ready(function() {
 
 
 /* TODO'S:
-
 Allow users to add new movies -- ALL SPECIFICATIONS DONE
-
 - Allow users to edit existing movies:
-
 - Give users the option to edit an existing movie
-
 - A form should be pre-populated with the selected movie's details
-
 Like creating a movie, this should not involve any page reloads,
 instead your javascript code should make an ajax request when the
 form is submitted.
-
 */
 
 
@@ -126,12 +120,9 @@ var button2 = document.getElementById("add-movie");
 
 
 /* NOTES FOR ME:
-
 This function grabs the user's inputs for adding a movie, then posts them.
-
 Everything is activated once the button is clicked, thus all the
 code is inside the event listener.
-
  */
 
 button2.addEventListener('click', function (e) {
@@ -200,14 +191,14 @@ getMovies().then((movies) => {
 
     $('#loader').css('display', 'none');
 
-    function capitalizeName(str) {
-        var array = str.split(" ");
-        for (var i = 0; i < array.length; i++) {
-            array[i] = array[i].charAt(0).toUpperCase() + array[i].slice(1).toLowerCase()
-        }
-        var strTwo = array.join(" ");
-        return strTwo;
-    }
+    // function capitalizeName(str) {
+    //     var array = str.split(" ");
+    //     for (var i = 0; i < array.length; i++) {
+    //         array[i] = array[i].charAt(0).toUpperCase() + array[i].slice(1).toLowerCase()
+    //     }
+    //     var strTwo = array.join(" ");
+    //     return strTwo;
+    // }
 
     console.log(movies)
     movies.forEach((movie) => {
@@ -224,7 +215,7 @@ getMovies().then((movies) => {
             </div>
             
             <div class="flip-card-back">
-            <h3 class="card-title">${capitalizeName(movie.title)}</h3>
+            <h3 class="card-title">${movie.title}</h3>
             <h6 class="card-text">${movie.genre}</h6>
              <div class="card-body">
             <p class="card-text">${movie.plot}</p>
@@ -242,9 +233,6 @@ data-movie-genre="${movie.genre}"
 data-movie-description="${movie.plot}"
 data-movie-poster="${movie.poster}"
 >Edit Movie<img class="pencil" src="https://cdn-icons.flaticon.com/png/512/2280/premium/2280557.png?token=exp=1634617541~hmac=e8530c8cf47886059196b1b3691c00eb"</button>
-
-
-
             <button type="button" class="btn btn-primary float-right btnDelete" data-movie-id="${movie.id}">Delete<img class="trash" src="https://cdn-icons.flaticon.com/png/512/914/premium/914343.png?token=exp=1634617657~hmac=b68b1200b09ac1f0ec5ecc65197d7034"></button>
    
            </div>
@@ -252,11 +240,11 @@ data-movie-poster="${movie.poster}"
             </div>
             </div> <!-- FLip card animation stops here  -->    
              `)
-        });
+    });
 
-editButton();
+    editButton();
 
-deleteButton();
+    deleteButton();
 
 })
 
@@ -274,13 +262,9 @@ var movieDescEdit = document.getElementById('movie-description-new');
 var movieURLEdit = document.getElementById('movie-image-new');
 
 /* NOTE FOR ME:
-
 This changes the movie data, but we need to do two things.
-
 1. The data needs to update without refreshing the page.
-
 2. It needs to return an AJAX request somehow.
-
 * */
 
 var button = document.getElementById("submit");
@@ -388,7 +372,7 @@ function deleteButton() {
 
 
             // console.log(this.dataset.movieId)
-})}
+        })}
 
 }
 
@@ -398,8 +382,8 @@ span.addEventListener('click', function (e) {
 })
 
 // When the user clicks anywhere outside of the modal, close it
-    window.addEventListener('click', function (e) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    });
+window.addEventListener('click', function (e) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+});

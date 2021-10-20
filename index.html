@@ -26,11 +26,11 @@
 
 <section class="movies-section">
 
-<div id="loader" class="center"></div>
+    <div id="loader" class="center"></div>
 
-<h3 class="add-movie-title"><img class="star-2" src="https://cdn-icons.flaticon.com/png/512/782/premium/782980.png?token=exp=1634611559~hmac=0df3beb252f47d57c426cb0f6385d643">Add your favorite movies<img class="star" src="https://cdn-icons.flaticon.com/png/512/782/premium/782980.png?token=exp=1634611559~hmac=0df3beb252f47d57c426cb0f6385d643"> </h3>
+    <h3 class="add-movie-title"><img class="star-2" src="https://cdn-icons.flaticon.com/png/512/782/premium/782980.png?token=exp=1634611559~hmac=0df3beb252f47d57c426cb0f6385d643">Add your favorite movies<img class="star" src="https://cdn-icons.flaticon.com/png/512/782/premium/782980.png?token=exp=1634611559~hmac=0df3beb252f47d57c426cb0f6385d643"> </h3>
 
-<div class="row">
+    <div class="row">
 
         <form id="add-movie-form">
 
@@ -74,12 +74,12 @@
 
             <br>
             <input type="text" id="site-search" name="q" size="50" placeholder="Search for a movie by title">
-                    <br>
-                    <br>
+            <br>
+            <br>
             <button id="omdb-btn" class="btn btn-primary">Search</button>
         </form>
 
-</div>
+    </div>
 
     <br>
 
@@ -93,64 +93,64 @@
 
     </div>
 
-<!-- The Modal -->
-<div id="modal" class="modal">
+    <!-- The Modal -->
+    <div id="modal" class="modal">
 
-    <!-- Modal content -->
-    <div class="modal-content">
+        <!-- Modal content -->
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Edit a movie!</h3>
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Edit a movie!</h3>
 
-            <div class="form-group">
-            <form>
+                <div class="form-group">
+                    <form>
 
-                <div class="hide">
-                <label for="movie-id">Movie ID:</label>
-                <br>
-                <input type="text" class="input-large search-query" id="movie-id" size="50">
+                        <div class="hide">
+                            <label for="movie-id">Movie ID:</label>
+                            <br>
+                            <input type="text" class="input-large search-query" id="movie-id" size="50">
+                        </div>
+
+                        <br>
+                        <label for="movie-title-new">Title:</label>
+                        <br>
+                        <input type="text" id="movie-title-new" size="50">
+
+                        <br>
+                        <label for="movie-rating-new">Rating:</label>
+                        <br>
+                        <input type="text" id="movie-rating-new" size="50">
+
+                        <br>
+                        <label for="movie-genre-new">Genre:</label>
+                        <br>
+                        <input type="text" id="movie-genre-new" size="50">
+
+
+                        <br>
+                        <label for="movie-description-new">Description:</label>
+                        <br>
+                        <input type="text" id="movie-description-new" size="50">
+
+                        <br>
+                        <label for="movie-image-new">Poster (Image URL):</label>
+                        <br>
+                        <input type="text" id="movie-image-new" size="50">
+
+
+                        <br>
+                        <button type="button" class="btn btn-primary" id="submit" >Submit</button>
+                    </form>
                 </div>
 
-                <br>
-                <label for="movie-title-new">Title:</label>
-                <br>
-                <input type="text" id="movie-title-new" size="50">
-
-                <br>
-                <label for="movie-rating-new">Rating:</label>
-                <br>
-                <input type="text" id="movie-rating-new" size="50">
-
-                <br>
-                <label for="movie-genre-new">Genre:</label>
-                <br>
-                <input type="text" id="movie-genre-new" size="50">
-
-
-                <br>
-                <label for="movie-description-new">Description:</label>
-                <br>
-                <input type="text" id="movie-description-new" size="50">
-
-                <br>
-                <label for="movie-image-new">Poster (Image URL):</label>
-                <br>
-                <input type="text" id="movie-image-new" size="50">
-
-
-                <br>
-                <button type="button" class="btn btn-primary" id="submit" >Submit</button>
-            </form>
+            </div>
         </div>
 
-        </div>
     </div>
 
-</div>
 
 
-
-<div class="row movies-display" id="movies-div"></div>
+    <div class="row movies-display" id="movies-div"></div>
 
 
 </section>
@@ -163,4 +163,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
