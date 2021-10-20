@@ -2,7 +2,12 @@ console.log("Hooked up")
 
 /* The movieAPI has been hooked up! */
 
+
 var movieAPI = "https://obsidian-dune-boater.glitch.me/movies";
+
+/* SearchForAMovie function (lines 12-54) pulls in the OMDB API
+and look through their database based on the user search input. Then, it displays
+the new movie (lines 30-53) */
 
 function searchForAMovie(movieName) {
     const url = `http://www.omdbapi.com/?i=tt3896198&apikey=5a824055&t=${movieName}&plot=full`;
@@ -17,9 +22,9 @@ function searchForAMovie(movieName) {
         .then((data) => {
                 console.log(data)
                 console.log(data.Plot);
-                // console.log(data.Title);
                 alert("Your search has been added to your favorite movies!")
 
+/* Appending OMDB data (lines 29-52) */
 
                 $('#movies-div').append(
                     `
@@ -41,75 +46,32 @@ function searchForAMovie(movieName) {
                         
                     </div>
                     
-                   
                 </div>
                     
-                    
                 </div>    
-                </div>`
-                )
-
-
-            }
-
-        )
+             </div>`
+                )})
         .catch(error => console.log((error)));
-    // error handeling
 
 }
 
-// console.log(searchForAMovie(omdbUserInput))
-$( document ).ready(function() {
+/* The omdb button is the "search" button. On click, execute
+ searchForAMovie function (lines 12-54) */
+
     $('#omdb-btn').on("click", function (e) {
         e.preventDefault()
         var omdbUserInput = $('#site-search').val()
         //console.log(omdbUserInput)
         searchForAMovie(omdbUserInput)
 
-
-
-        // omdbUserInput.forEach((movie) => {
-        //     console.log(movie)
-        //     $('#omdb-div').append(
-        //         `<div class="card col-md-4 flip-card" id="${movie.search.imdbID}">
-        //     <div class="flip-card-inner">
-        //
-        //     <div class="flip-card-front">
-        //     <img class="card-img-top" src="${movie.search.Poster}">
-        //     </div>
-        //
-        //     <div class="flip-card-back">
-        //     <h3 class="card-title">${movie.search.Title}</h3>
-        //     <h6 class="card-text">${movie.search.Year}</h6>
-        //      <div class="card-body">`
-        //     )
-        // })
     })
-})
-
-
-
-/* TODO'S:
-Allow users to add new movies -- ALL SPECIFICATIONS DONE
-- Allow users to edit existing movies:
-- Give users the option to edit an existing movie
-- A form should be pre-populated with the selected movie's details
-Like creating a movie, this should not involve any page reloads,
-instead your javascript code should make an ajax request when the
-form is submitted.
-*/
 
 
 
 /* --------------- ADD MOVIE SECTION ---------------  */
 
 
-/* Used this function to clean up movies object */
-
-
-
-
-/* Variables declared outside of function so they can be passed in. */
+/* Variables declared outside of function so they can be passed in (global). */
 
 var movieTitleCustom = document.getElementById('movie-title-custom');
 var movieRatingCustom = document.getElementById('movie-rating-custom');
@@ -180,6 +142,8 @@ button2.addEventListener('click', function (e) {
 
 /* --------------- LOAD MOVIE SECTION ---------------  */
 
+/* Gets all the movies from the database */
+
 function getMovies() {
     return fetch(movieAPI)
         .then((response) =>
@@ -187,25 +151,16 @@ function getMovies() {
 
 }
 
+/* after it gets everything, it appends it all (lines 163-201) */
+
 getMovies().then((movies) => {
 
     $('#loader').css('display', 'none');
-
-    // function capitalizeName(str) {
-    //     var array = str.split(" ");
-    //     for (var i = 0; i < array.length; i++) {
-    //         array[i] = array[i].charAt(0).toUpperCase() + array[i].slice(1).toLowerCase()
-    //     }
-    //     var strTwo = array.join(" ");
-    //     return strTwo;
-    // }
 
     console.log(movies)
     movies.forEach((movie) => {
 
         $('#movies-div').append(
-
-
 
             `<div class="card col-md-4 flip-card" id="${movie.id}">
             <div class="flip-card-inner">
@@ -225,6 +180,10 @@ getMovies().then((movies) => {
       
             
 <!-- Trigger/Open The Modal -->
+
+<!-- All these data attributes stores whatever is in this input and allows it to be shown in their
+respective modals. Think of these as mini-identifiers but JUST for data. -->
+
 <button class="btn btn-primary myBtn float-left" 
 data-movie-id="${movie.id}" 
 data-movie-title="${movie.title}" 
@@ -242,9 +201,9 @@ data-movie-poster="${movie.poster}"
              `)
     });
 
-    editButton();
+    editButton(); //Calls editButton function (lines 293-306)
 
-    deleteButton();
+    deleteButton(); //Calls deleteButton function (lines 325-336)
 
 })
 
@@ -262,9 +221,9 @@ var movieDescEdit = document.getElementById('movie-description-new');
 var movieURLEdit = document.getElementById('movie-image-new');
 
 /* NOTE FOR ME:
-This changes the movie data, but we need to do two things.
-1. The data needs to update without refreshing the page.
-2. It needs to return an AJAX request somehow.
+All the variables above pull from the input boxes; the value of them is stored so it can be
+rendered as a movie. When you hit "submit", the user created movie is converted into a movie
+like the others (lines 231-274)
 * */
 
 var button = document.getElementById("submit");
@@ -329,7 +288,7 @@ var span = document.getElementsByClassName("close")[0];
 var btnDelete = document.getElementsByClassName("btnDelete");
 
 
-// When the user clicks on any button, open the modal and store the given movie data
+// When the user clicks on any button, open the modal and call the given movie data to be displayed
 
 function editButton() {
     for (var i = 0; i < btn.length; i++) {
@@ -371,7 +330,7 @@ function deleteButton() {
             deleteMovie(this.dataset.movieId)
 
 
-            // console.log(this.dataset.movieId)
+
         })}
 
 }
