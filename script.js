@@ -22,7 +22,20 @@ function searchForAMovie(movieName) {
         .then((data) => {
                 console.log(data)
                 console.log(data.Plot);
-                alert("Your search has been added to your favorite movies!")
+
+            let newMovieOMDB = {
+                title: data.Title,
+                rating: data.imdbRating,
+                genre: data.Genre,
+                plot: data.Plot,
+                poster: data.Poster,
+                id: data.imdbID
+            };
+
+                console.log(newMovieOMDB);
+            createNewMovie(newMovieOMDB)
+
+            alert("Your search has been added to your favorite movies!");
 
 /* Appending OMDB data (lines 29-52) */
 
@@ -42,16 +55,31 @@ function searchForAMovie(movieName) {
                         <p class="card-text">${data.Plot}</p>
                         <p class="card-text">Rating: ${data.imdbRating}</p>
                         
-                        <button type="button" class="btn btn-primary">You cannot edit or delete this movie!</button>
+                        <button class="btn btn-primary myBtn float-left" 
+data-movie-id="${data.imdbID}" 
+data-movie-title="${data.Title}" 
+data-movie-rating="${data.imdbRating}"
+data-movie-genre="${data.Plot}"
+data-movie-description="${data.Plot}"
+data-movie-poster="${data.Poster}"
+>Edit Movie<img class="pencil" src="https://cdn-icons.flaticon.com/png/512/2280/premium/2280557.png?token=exp=1634617541~hmac=e8530c8cf47886059196b1b3691c00eb"</button>
+            <button type="button" class="btn btn-primary float-right btnDelete" data-movie-id="${data.imdbid}">Delete<img class="trash" src="https://cdn-icons.flaticon.com/png/512/914/premium/914343.png?token=exp=1634617657~hmac=b68b1200b09ac1f0ec5ecc65197d7034"></button>
+
+                        
                         
                     </div>
                     
                 </div>
                     
                 </div>    
-             </div>`
-                )})
-        .catch(error => console.log((error)));
+             </div>`)
+
+
+            editButton(); //Calls editButton function (lines 293-306)
+
+            deleteButton(); //Calls deleteButton function (lines 325-336)
+
+        })
 
 }
 
@@ -87,6 +115,22 @@ Everything is activated once the button is clicked, thus all the
 code is inside the event listener.
  */
 
+function createNewMovie(movie) {
+
+    let options = {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(movie) //converts the JS Object into a JSON string before sending
+        // it up to the server.
+    }
+    return fetch(`${movieAPI}`, options)
+        .then((response) =>
+            response.json())
+
+}
+
 button2.addEventListener('click', function (e) {
 
     /* Allows code to pick up user's input */
@@ -109,21 +153,6 @@ button2.addEventListener('click', function (e) {
 
     /* Allows user's input to be sent to database */
 
-    function createNewMovie(movie) {
-
-        let options = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(movie) //converts the JS Object into a JSON string before sending
-            // it up to the server.
-        }
-        return fetch(`${movieAPI}`, options)
-            .then((response) =>
-                response.json())
-
-    }
 
     /* Passes newMovie object in createNewMovie function */
 
@@ -324,12 +353,9 @@ function deleteMovie(id) {
 
 function deleteButton() {
     for (var i = 0; i < btnDelete.length; i++) {
-        console.log("hi")
         btnDelete[i].addEventListener('click', function (e) {
             e.preventDefault();
             deleteMovie(this.dataset.movieId)
-
-
 
         })}
 
